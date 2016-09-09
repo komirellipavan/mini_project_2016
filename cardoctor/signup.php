@@ -19,7 +19,7 @@ function clean($string) {
 
 
 $address = $temp . "address";
-
+$cars = $temp . "cars";
 
 //address values
 $country = $_POST['country'];
@@ -42,15 +42,34 @@ else
 {
 	$success1 = "null";
 }
+
+//create cars table
+$sql = "CREATE TABLE $cars(
+id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+name TEXT NOT NULL,
+brand TEXT NOT NULL,
+madeyear TEXT NOT NULL,
+regno TEXT NOT NULL
+)";
+
+mysqli_query($con, $sql);
+
 //create address tables
 $sql = "CREATE TABLE $address(
 id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-$country VARCHAR(30) NOT NULL,
-$state VARCHAR(30) NOT NULL,
-$city VARCHAR(50) NOT NULL,
-$subregion VARCHAR(30) NOT NULL,
-$streetaddress VARCHAR(30) NOT NULL
+country VARCHAR(30) NOT NULL,
+state VARCHAR(30) NOT NULL,
+city VARCHAR(50) NOT NULL,
+subregion VARCHAR(30) NOT NULL,
+streetaddress VARCHAR(30) NOT NULL
 )";
+
+mysqli_query($con, $sql);
+
+
+
+$sql = "INSERT INTO $address (country ,state ,city ,subregion ,streetaddress)
+VALUES ('$country', '$state', '$city','$subregion','$streetaddress')";
 
 
 $success2 = "null";
