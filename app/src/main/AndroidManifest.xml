@@ -55,7 +55,12 @@
             android:name=".autoLocator"
             android:label="@string/title_activity_auto_locator" />
         <activity android:name=".AddCar" />
-        <activity android:name=".AddCarSubmit"></activity>
+        <activity android:name=".AddCarSubmit" />
+        <activity android:name=".AddAddress" />
+        <activity android:name=".AddAddressSubmit" />
+        <activity android:name=".ChangePassword" />
+        <activity android:name=".SearchFilter" />
+        <activity android:name=".Book"></activity>
     </application>
 
 </manifest>

@@ -91,6 +91,18 @@ public class Home extends AppCompatActivity
             Home.this.finish();
 
         }
+        else if(id == R.id.nav_address){
+            Intent intent = new Intent(Home.this,AddAddress.class);
+            startActivity(intent);
+            Home.this.finish();
+
+        }
+        else if(id == R.id.nav_change_password){
+            Intent intent = new Intent(Home.this,ChangePassword.class);
+            startActivity(intent);
+            Home.this.finish();
+
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

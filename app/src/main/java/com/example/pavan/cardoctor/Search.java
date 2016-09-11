@@ -47,6 +47,7 @@ public class Search extends AppCompatActivity {
     private EditText search;
     private boolean noResult;
     ListView listview;
+    Uri.Builder builder;
 
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
@@ -95,6 +96,8 @@ public class Search extends AppCompatActivity {
         search.addTextChangedListener(textWatcher);
 
 
+
+
     }
 
     private class found extends AsyncTask<String, String, String> {
@@ -137,8 +140,28 @@ public class Search extends AppCompatActivity {
                 conn.setDoOutput(true);
 
                 // Append parameters to URL
-                Uri.Builder builder = new Uri.Builder()
-                        .appendQueryParameter("search", params[0]);
+
+                SharedPreferences sharedpreferences = getSharedPreferences("filter", Context.MODE_PRIVATE);
+                String status = sharedpreferences.getString("status","no");
+                if(status == "true") {
+
+                    Log.i("h", "doInBackground: true");
+                     builder = new Uri.Builder()
+
+                            .appendQueryParameter("search", params[0])
+                            .appendQueryParameter("status","true")
+                            .appendQueryParameter("brand1", sharedpreferences.getString("brand1","no"))
+                            .appendQueryParameter("brand2", sharedpreferences.getString("brand2","no"))
+                            .appendQueryParameter("brand3", sharedpreferences.getString("brand3","no"))
+                            .appendQueryParameter("brand4", sharedpreferences.getString("brand4","no"))
+                            .appendQueryParameter("brand5", sharedpreferences.getString("brand5","no"))
+                            .appendQueryParameter("brand6", sharedpreferences.getString("brand6","no"));
+                }
+                else {
+                    builder = new Uri.Builder()
+                            .appendQueryParameter("status","false")
+                            .appendQueryParameter("search", params[0]);
+                }
 
                 String query = builder.build().getEncodedQuery();
 
@@ -216,7 +239,7 @@ public class Search extends AppCompatActivity {
                     ArrayList<ServiceProviderList> results = new ArrayList<>();
                     ServiceProviderList list;
 
-
+                    Log.i("hi", "onPostExecute: "+result.toString());
                     // Create JSONObject from result JSON string
                     JSONArray arr = new JSONObject(result.toString()).getJSONArray("posts");
                     // get the 'posts' section from the JSON string
@@ -290,7 +313,13 @@ public class Search extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.location) {
-            Toast.makeText(getApplicationContext(),"location", Toast.LENGTH_LONG).show();
+           Toast.makeText(getApplicationContext(),"location", Toast.LENGTH_LONG).show();
+        }
+        if (id == R.id.filter) {
+           // Toast.makeText(getApplicationContext(),"location", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(this, SearchFilter.class);
+            startActivity(i);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

@@ -110,7 +110,9 @@
             android:text="Female"
             android:id="@+id/female"
             android:layout_gravity="center_horizontal"
-            android:checked="false" />
+            android:checked="false"
+            android:layout_alignLeft="@+id/male"
+            android:layout_alignStart="@+id/male"/>
 
     </RadioGroup>
 
