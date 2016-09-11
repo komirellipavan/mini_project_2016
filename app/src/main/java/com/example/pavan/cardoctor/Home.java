@@ -2,9 +2,11 @@ package com.example.pavan.cardoctor;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -53,6 +55,8 @@ public class Home extends AppCompatActivity
 
    public void carRepair(View view){
        Intent carRepair = new Intent(this,Search.class);
+       carRepair.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
        startActivity(carRepair);
        finish();
    }
@@ -68,22 +72,25 @@ public class Home extends AppCompatActivity
         boolean deleted;
         if (id == R.id.nav_signout) {
 
-            try {
-                this.deleteFile("client.txt");
-                this.deleted =  true;
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
-            if(this.deleted){
+            SharedPreferences preferences = getSharedPreferences("log", 0);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.clear();
+            if(editor.commit()) {
 
-                Intent intent = new Intent(Home.this, MainActivity.class);
+                Intent intent = new Intent(this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                Home.this.finish();
+                finish();
             }
-        } //use else if
+
+
+        } else if(id == R.id.nav_car){
+            Intent intent = new Intent(Home.this,AddCar.class);
+            startActivity(intent);
+            Home.this.finish();
+
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

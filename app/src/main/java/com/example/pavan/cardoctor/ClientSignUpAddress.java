@@ -372,15 +372,11 @@ public class ClientSignUpAddress extends AppCompatActivity {
                 /* Here launching another activity when login successful. If you persist login state
                 use sharedPreferences of Android. and logout button to clear sharedPreferences.
                  */
-                    try {
-                        String string = emailId;
+                String string = emailId;
+                SharedPreferences sharedpreferences = getSharedPreferences("log", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putString("email",emailId);
 
-                        FileOutputStream fOut = openFileOutput("client.txt",Context.MODE_PRIVATE);
-                        fOut.write(string.getBytes());
-                        fOut.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                     Intent intent = new Intent(ClientSignUpAddress.this, Home.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
