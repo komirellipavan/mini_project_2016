@@ -83,7 +83,18 @@ public class Search extends AppCompatActivity {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 Object o = listview.getItemAtPosition(position);
                 ServiceProviderList newsData = (ServiceProviderList) o;
-                Toast.makeText(Search.this, "Selected :" + " " + newsData, Toast.LENGTH_LONG).show();
+                //Toast.makeText(Search.this, "Selected :" + " " + newsData, Toast.LENGTH_LONG).show();
+                ServiceProviderList item = (ServiceProviderList) (listview.getItemAtPosition(position));
+                SharedPreferences sharedpreferences = getSharedPreferences("book", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putString("shopname",item.getShopName());
+                editor.putString("rating",item.getRating());
+                editor.putString("email",item.getEmail());
+                editor.putString("address",item.getStreet()+","+item.getSubregion()+","+item.getCity()+","+item.getState()+","+item.getCountry());
+                editor.commit();
+                Intent i = new Intent(Search.this,Book.class);
+                startActivity(i);
+                finish();
             }
         });
 
@@ -143,9 +154,10 @@ public class Search extends AppCompatActivity {
 
                 SharedPreferences sharedpreferences = getSharedPreferences("filter", Context.MODE_PRIVATE);
                 String status = sharedpreferences.getString("status","no");
-                if(status == "true") {
+                Log.i("hkkk",sharedpreferences.getString("status","no"));
+                if(status.equals("true")) {
 
-                    Log.i("h", "doInBackground: true");
+
                      builder = new Uri.Builder()
 
                             .appendQueryParameter("search", params[0])
@@ -254,6 +266,8 @@ public class Search extends AppCompatActivity {
                         list.setCity(post.getString("city"));
                         list.setState(post.getString("state"));
                         list.setCountry(post.getString("country"));
+                        list.setRating(post.getString("rating"));
+                        list.setEmail(post.getString("email"));
                         results.add(list);
 
 

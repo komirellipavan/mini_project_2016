@@ -11,6 +11,26 @@ public class ServiceProviderList {
     private String state;
     private String country;
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    private String email;
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    private String rating;
+
 
 
 

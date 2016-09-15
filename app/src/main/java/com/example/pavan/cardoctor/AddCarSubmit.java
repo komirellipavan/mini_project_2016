@@ -56,6 +56,7 @@ public class AddCarSubmit extends AppCompatActivity  implements AdapterView.OnIt
         categories.add("Tata Motors");
         categories.add("Hyundai ");
         categories.add("Toyota");
+        categories.add("Toyota");
         categories.add("Chevrolet");
         item = "Maruti";
 

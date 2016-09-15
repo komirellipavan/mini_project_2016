@@ -27,14 +27,13 @@ public class SearchFilter extends AppCompatActivity {
         sharedpreferences = getSharedPreferences("filter", Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
 
-        Log.i("k", "onClick: "+ sharedpreferences.getString("brand1","no"));
-        Log.i("k", "onClick: "+ sharedpreferences.getString("brand2","no"));
-        Log.i("k", "onClick: "+ sharedpreferences.getString("brand3","no"));
-        Log.i("k", "onClick: "+ sharedpreferences.getString("brand4","no"));
-        Log.i("k", "onClick: "+ sharedpreferences.getString("brand5","no"));
-        Log.i("k", "onClick: "+ sharedpreferences.getString("brand6","no"));
-        Log.i("k", "onClick: "+ sharedpreferences.getString("status","no"));
-
+        Log.i("h",sharedpreferences.getString("status","no") );
+        Log.i("h",sharedpreferences.getString("brand1","no") );
+        Log.i("h",sharedpreferences.getString("brand2","no") );
+        Log.i("h",sharedpreferences.getString("brand3","no") );
+        Log.i("h",sharedpreferences.getString("brand4","no") );
+        Log.i("h",sharedpreferences.getString("brand5","no") );
+        Log.i("h",sharedpreferences.getString("brand6","no") );
         ch1=(CheckBox)findViewById(R.id.checkBox);
         ch2=(CheckBox)findViewById(R.id.checkBox2);
         ch3=(CheckBox)findViewById(R.id.checkBox3);
@@ -42,22 +41,22 @@ public class SearchFilter extends AppCompatActivity {
         ch5=(CheckBox)findViewById(R.id.checkBox5);
         ch6=(CheckBox)findViewById(R.id.checkBox6);
 
-        if(sharedpreferences.getString("brand1","no")=="Maruti"){
+        if(sharedpreferences.getString("brand1","no").equals("Maruti")){
             ch1.setChecked(true);
         }
-        if(sharedpreferences.getString("brand2","no")=="Honda"){
+        if(sharedpreferences.getString("brand2","no").equals("Honda")){
             ch2.setChecked(true);
         }
-        if(sharedpreferences.getString("brand3","no")=="Tata Motors"){
+        if(sharedpreferences.getString("brand3","no").equals("Tata Motors")){
             ch3.setChecked(true);
         }
-        if(sharedpreferences.getString("brand4","no")=="Hyundai"){
+        if(sharedpreferences.getString("brand4","no").equals("Hyundai")){
             ch4.setChecked(true);
         }
-        if(sharedpreferences.getString("brand5","no")=="Toyata"){
+        if(sharedpreferences.getString("brand5","no").equals("Toyata")){
             ch5.setChecked(true);
         }
-        if(sharedpreferences.getString("brand6","no")=="chevrolet"){
+        if(sharedpreferences.getString("brand6","no").equals("chevrolet")){
             ch6.setChecked(true);
         }
 

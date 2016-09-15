@@ -3,11 +3,12 @@
     package="com.example.pavan.cardoctor">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
+         location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -60,7 +61,10 @@
         <activity android:name=".AddAddressSubmit" />
         <activity android:name=".ChangePassword" />
         <activity android:name=".SearchFilter" />
-        <activity android:name=".Book"></activity>
+        <activity android:name=".Book" />
+        <activity android:name=".BookContinue" />
+        <activity android:name=".EditProfile"></activity>
+        <activity android:name=".ForGotPassword"></activity>
     </application>
 
 </manifest>
