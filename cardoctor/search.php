@@ -43,7 +43,7 @@ $brand6 = $_POST['brand6'];
 	}
 	
 	$append .=" brand LIKE '%hello%'";
-	$sql = "SELECT brand,shopname,street,subregion,city,state,country,rating FROM serviceglobal WHERE email IN (SELECT email 
+	$sql = "SELECT brand,shopname,street,subregion,city,state,country,rating,email FROM serviceglobal WHERE email IN (SELECT email 
 														   FROM search 
 														   WHERE address LIKE '%$search%') AND ($append)";
 													
@@ -51,7 +51,7 @@ $brand6 = $_POST['brand6'];
 }
 else{
 	
-	$sql = "SELECT brand,shopname,street,subregion,city,state,country,rating FROM serviceglobal WHERE email IN (SELECT email 
+	$sql = "SELECT brand,shopname,street,subregion,city,state,country,rating,email FROM serviceglobal WHERE email IN (SELECT email 
 														   FROM search 
 														   WHERE address LIKE '%$search%') ";
 	
