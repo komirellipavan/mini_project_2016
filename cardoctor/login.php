@@ -29,5 +29,5 @@ else{
 	echo "reject";
 }
 
-
+mysqli_close($con);
 ?>

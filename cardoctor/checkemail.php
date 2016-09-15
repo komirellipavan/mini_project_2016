@@ -25,4 +25,5 @@ if($check == "done"){
 else{
 	echo "no";
 }
+mysqli_close($con);
 ?>
