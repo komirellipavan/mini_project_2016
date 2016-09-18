@@ -1,0 +1,40 @@
+<html>
+<head>
+<script src="/chat-example/node_modules/socket.io-client/socket.io.js"></script>
+<script>
+var socket = io.connect('http://localhost:3000');
+
+// on connection to server, ask for user's name with an anonymous callback
+	socket.on('connect', function(){
+		// call the server-side function 'adduser' and send one parameter (value of prompt)
+		socket.emit('adduser', prompt("What's your name?"));
+		
+
+		
+	});
+	function check(){
+		console.log("check");
+		socket.emit('check', "ram@gmail.com");
+	}
+	
+	socket.on('status', function (status) {
+		document.getElementById("status").innerHTML  = status;
+		console.log(status);
+	});
+	function book(){
+		console.log("Book");
+		socket.emit('book', "ram@gmail.com","pavan@gmail.com");
+	}
+
+</script>
+</head>
+
+<body>
+
+<button onclick="check()" >check</button>
+<p id="status"></p>
+<button onclick="book()" >Book</button>
+</body>
+
+
+</html>
