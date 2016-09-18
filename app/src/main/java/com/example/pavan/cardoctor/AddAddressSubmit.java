@@ -58,8 +58,8 @@ public class AddAddressSubmit extends AppCompatActivity {
     }
 
     public void submit(View view){
-        SharedPreferences sharedpreferences = getSharedPreferences("client", Context.MODE_PRIVATE);
-        emailId = sharedpreferences.getString("emailId","hello");
+        SharedPreferences sharedpreferences = getSharedPreferences("log", Context.MODE_PRIVATE);
+        emailId = sharedpreferences.getString("email","hello");
 
         country_ = country.getText().toString();
         state_ = state.getText().toString();
@@ -116,7 +116,7 @@ public class AddAddressSubmit extends AppCompatActivity {
                         .appendQueryParameter("state", params[2])
                         .appendQueryParameter("city", params[3])
                         .appendQueryParameter("subregion", params[4])
-                        .appendQueryParameter("street", params[4]);
+                        .appendQueryParameter("street", params[5]);
 
 
                 String query = builder.build().getEncodedQuery();

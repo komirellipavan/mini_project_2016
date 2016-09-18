@@ -768,7 +768,7 @@ public class EditProfile extends AppCompatActivity implements SingleUploadBroadc
         @Override
         protected void onPostExecute(String result) {
 
-            if(result.equals("done")){
+            if(result.trim().equals("done")){
                 Toast.makeText(getApplicationContext(),"Profile saved", Toast.LENGTH_LONG).show();
                 SharedPreferences sharedpreferences = getSharedPreferences("log", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedpreferences.edit();

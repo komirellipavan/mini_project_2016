@@ -224,12 +224,12 @@ public class ClientSignUpAddress extends AppCompatActivity {
 
             pdLoading.dismiss();
 
-            if(result.equalsIgnoreCase("no"))
+            if(result.trim().equalsIgnoreCase("no"))
             {
                 /* Here launching another activity when login successful. If you persist login state
                 use sharedPreferences of Android. and logout button to clear sharedPreferences.
                  */
-                SharedPreferences sharedpreferences = getSharedPreferences("client", Context.MODE_PRIVATE);
+                SharedPreferences sharedpreferences = getSharedPreferences("signuptemp", Context.MODE_PRIVATE);
                 name = sharedpreferences.getString("name",null);
                 password = sharedpreferences.getString("password",null);
                 gender = sharedpreferences.getString("gender",null);
@@ -247,7 +247,8 @@ public class ClientSignUpAddress extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"OOPs! Something went wrong. Connection Problem.", Toast.LENGTH_LONG).show();
 
-            } else if(result.equalsIgnoreCase("done")){
+            } else if(result.trim().equalsIgnoreCase("done")){
+                Log.i("",result);
                 Toast.makeText(getApplicationContext(),"emailID already in use,please enter another emailID", Toast.LENGTH_LONG).show();
 
             }
@@ -376,7 +377,7 @@ public class ClientSignUpAddress extends AppCompatActivity {
                 SharedPreferences sharedpreferences = getSharedPreferences("log", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
                 editor.putString("email",emailId);
-
+                editor.commit();
                     Intent intent = new Intent(ClientSignUpAddress.this, Home.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -397,7 +398,7 @@ public class ClientSignUpAddress extends AppCompatActivity {
     }
 
     public void done(View view){
-        SharedPreferences sharedpreferences = getSharedPreferences("client", Context.MODE_PRIVATE);
+        SharedPreferences sharedpreferences = getSharedPreferences("log", Context.MODE_PRIVATE);
         emailId = sharedpreferences.getString("emailId","hello");
 
 

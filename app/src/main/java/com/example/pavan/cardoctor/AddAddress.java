@@ -311,7 +311,8 @@ public class AddAddress extends AppCompatActivity {
 
                 int response_code = conn.getResponseCode();
 
-                // Check if successful connection made
+                // Check if succe
+                // ssful connection made
                 if (response_code == HttpURLConnection.HTTP_OK) {
 
                     // Read data sent from server

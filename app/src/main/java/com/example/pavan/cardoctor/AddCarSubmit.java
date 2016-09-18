@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -56,7 +57,6 @@ public class AddCarSubmit extends AppCompatActivity  implements AdapterView.OnIt
         categories.add("Tata Motors");
         categories.add("Hyundai ");
         categories.add("Toyota");
-        categories.add("Toyota");
         categories.add("Chevrolet");
         item = "Maruti";
 
@@ -93,8 +93,10 @@ public class AddCarSubmit extends AppCompatActivity  implements AdapterView.OnIt
     }
 
     public void submit(View view){
-        SharedPreferences sharedpreferences = getSharedPreferences("client", Context.MODE_PRIVATE);
-        emailId = sharedpreferences.getString("emailId","hello");
+        SharedPreferences sharedpreferences = getSharedPreferences("log", Context.MODE_PRIVATE);
+        emailId = sharedpreferences.getString("email","hello");
+
+        Log.i("hhh",emailId);
 
         new AddCars().execute(emailId,carName.getText().toString(),item,date.getText().toString(),regNo.getText().toString());
 
@@ -208,7 +210,7 @@ public class AddCarSubmit extends AppCompatActivity  implements AdapterView.OnIt
 
             pdLoading.dismiss();
 
-            if(result.equalsIgnoreCase("done"))
+            if(result.trim().equalsIgnoreCase("done"))
             {
                 /* Here launching another activity when login successful. If you persist login state
                 use sharedPreferences of Android. and logout button to clear sharedPreferences.

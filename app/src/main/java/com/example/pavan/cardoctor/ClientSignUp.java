@@ -100,7 +100,7 @@ public class ClientSignUp extends AppCompatActivity {
         Intent intent = new Intent(this, ClientSignUpAddress.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
-        SharedPreferences sharedpreferences = getSharedPreferences("client", Context.MODE_PRIVATE);
+        SharedPreferences sharedpreferences = getSharedPreferences("signuptemp", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putString("name",name.getText().toString());
         editor.putString("password",password.getText().toString());

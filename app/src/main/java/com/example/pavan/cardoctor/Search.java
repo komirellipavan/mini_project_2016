@@ -325,7 +325,7 @@ public class Search extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        //noinspection SimplishfiableIfStatement
         if (id == R.id.location) {
            Toast.makeText(getApplicationContext(),"location", Toast.LENGTH_LONG).show();
         }
