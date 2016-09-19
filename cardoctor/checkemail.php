@@ -3,8 +3,12 @@ require 'db.config.php';
 
 $email = $_POST['email'];
 
-$sql = "SELECT email FROM clientglobal";
+$sql = "SELECT email FROM clientglobal WHERE email= '$email'";
 $result = mysqli_query($con, $sql);
+if (!$result)
+  {
+  echo("Error description: " . mysqli_error($con));
+  }
 
 $check = null;
 if (mysqli_num_rows($result) > 0) {

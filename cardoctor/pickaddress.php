@@ -20,7 +20,8 @@ function clean($string) {
 $clientEmail = $temp . "address";
 
 $sql = "SELECT id FROM  $clientEmail a where city IN                                 
-								(SELECT city FROM serviceglobal where email = '$providerEmail' AND country = a.country)";
+								(SELECT city FROM serviceglobal where email = '$providerEmail' AND country = a.country AND 
+								city = a.city)";
 
 $result = mysqli_query($con, $sql);								
 $posts = array();

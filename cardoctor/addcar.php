@@ -31,6 +31,7 @@ if(mysqli_query($con, $sql)){
 else
 {
 	echo "no";
+	echo("Error description: " . mysqli_error($con));
 	
 }
 mysqli_close($con);
