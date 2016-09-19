@@ -1,0 +1,47 @@
+<html>
+<head>
+<script src="/chat-example/node_modules/socket.io-client/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script>
+var socket = io.connect('http://localhost:3000');
+
+// on connection to server, ask for user's name with an anonymous callback
+	socket.on('connect', function(){
+		// call the server-side function 'adduser' and send one parameter (value of prompt)
+		socket.emit('adduser', prompt("What's your name?"));
+		
+
+		
+	});
+	 socket.on('req', function(client){
+	 
+	document.getElementById("notify").innerHTML  = "Received Request";
+	console.log("hello"+client);
+	loadDoc();
+		
+	});
+	
+	function loadDoc() {
+  $.ajax({
+                        type:"post",
+                        url:"/chat-example/checktable.php",
+                     
+                        success:function(data){
+                             $("#chekctable").html(data);
+							 
+							 
+                        }
+                      });
+}
+
+</script>
+</head>
+
+<body>
+<p id="notify"></p>
+<p id="chekctable"></p>
+
+</body>
+
+
+</html>
