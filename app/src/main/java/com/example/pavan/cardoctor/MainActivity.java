@@ -33,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
         return file.exists();
     }
 
+    public void temp(View view){
+        Intent intent = new Intent(this,temp.class);
+        startActivity(intent);
+        finish();// destroys current activity
+    }
+
 
     private void validateUser(){
 
