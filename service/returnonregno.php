@@ -1,13 +1,10 @@
 <?php
 
 require 'db.config.php';
-
-
-									 
-$clientE = $_POST['clientemail'];
-$providerEmail = $_POST['provideremail'];
-
-$temp = clean($clientE);
+session_start();
+$email = $_SESSION['email'];
+$regno = $_POST['regno'];
+$temp = clean($email);
 
 
 //remove '@' and '.' from email address
@@ -17,13 +14,15 @@ function clean($string) {
    return preg_replace('/[^A-Za-z0-9\-]/', '', $string); 
 }
 
-$clientEmail = $temp . "address";
+$repair = $temp . "repair";
+$sql = "SELECT * FROM $repair WHERE regno='$regno'";
 
-$sql = "SELECT id FROM  $clientEmail a where city IN                                 
-								(SELECT city FROM serviceglobal where email = '$providerEmail' AND country = a.country AND 
-								city = a.city)";
+$result = mysqli_query($con, $sql);
+if (!$result)
+  {
+  echo("Error description: " . mysqli_error($con));
+  }
 
-$result = mysqli_query($con, $sql);								
 $posts = array();
 $check = false;
 if (mysqli_num_rows($result) > 0) {
@@ -37,10 +36,6 @@ if (mysqli_num_rows($result) > 0) {
     }
 	
 }
-
-
-
-
  encodearray($posts);
 
 /* Encode array to JSON string */
@@ -52,8 +47,8 @@ function encodearray($posts) {
 if(!$check){
 	echo "no";
 }
+	
 
 mysqli_close($con);
-
 
 ?>
