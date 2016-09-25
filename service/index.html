@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<title>Car Doctor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="/cardoctor/service/dashboard/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<script src="/chat-example/node_modules/socket.io-client/socket.io.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+
+<script>
+
+/**var socket = io.connect('http://localhost:3000');
+// on connection to server, ask for user's name with an anonymous callback
+
+
+	
+	socket.on('connect', function(){
+	var email;
+	$.ajax({
+            type: 'post',
+            url: '/cardoctor/service/dashboard/returnemail.php',
+            
+			success: function (data) {
+			
+					email = data;
+					//console.log(email);
+		socket.emit('adduser', email);
+			
+            }
+			   
+            
+          });		
+	});
+**/
+socket.on('book', function(client){
+	 notifyMe("book");
+	divload();	
+	});	
+function notifyMe(message) {
+
+ var title;
+ var options;
+  title = 'Car Doctor';
+            options = {
+              body: 'You have notification in ' +message,
+              tag: 'preset',
+              icon: 'noti.png'}
+  // Let's check if the browser supports notifications
+  if (!("Notification" in window)) {
+    alert("This browser does not support desktop notification");
+  }
+
+  // Let's check whether notification permissions have already been granted
+  else if (Notification.permission === "granted") {
+    // If it's okay let's create a notification
+    var notification = new Notification(title,options);
+  }
+
+  // Otherwise, we need to ask the user for permission
+  else if (Notification.permission !== 'denied') {
+    Notification.requestPermission(function (permission) {
+      // If the user accepts, let's create a notification
+      if (permission === "granted") {
+    
+      }
+    });
+  }
+
+  // At last, if the user has denied notifications, and you 
+  // want to be respectful there is no need to bother them any more.
+}
+
+function repair(){
+	 $("#main").load("repair-service.html");
+	 
+	 
+	}
+function overview(){
+	 $("#main").load("overview.html");
+	 divload();
+	 notifyMe("book");
+	}
+function logout(){
+		         $.ajax({
+            type: 'post',
+            url: '/cardoctor/service/logout.php',
+            
+			success: function (data) {
+					console.log("check");
+              if(data === "ok"){
+				window.location.href = "/cardoctor/service/"
+			  } 
+            }
+          });	  
+	  }
+	  
+function check(){
+  
+		 $.ajax({
+	type: 'post',
+	url: '/cardoctor/service/check.php',
+	
+	success: function (data) {
+			
+	  if(data === "no"){
+		window.location.href = "/cardoctor/service/"
+	  }
+
+	 $("#main").load("overview.html",function (){
+	 divload();
+	  
+	 });
+	 
+	
+		
+	}
+  });
+
+  
+}
+	  
+</script>
+
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+<body onload="check()" class="w3-light-grey">
+
+<!-- Top container -->
+<div class="w3-container w3-top w3-black w3-large w3-padding" style="z-index:4">
+  <button class="w3-btn w3-hide-large w3-padding-0 w3-hover-text-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <span class="w3-right w3-btn w3-small" onclick="logout()"><b>Logout</b></span>
+  <span ><b><img height="30" width="30" src="car.png"> Car Doctor</b></span>
+</div>
+
+<!-- Sidenav/menu -->
+<nav class="w3-sidenav w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidenav"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s4">
+      <img src="img_avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
+    </div>
+    <div class="w3-col s8">
+      <span>Welcome, <strong>Mike</strong></span><br>
+      <a href="#" class="w3-hover-none w3-hover-text-green w3-show-inline-block"><i class="fa fa-user"></i></a>
+      
+    </div>
+  </div>
+  <hr>
+  <div class="w3-container">
+    <h5>Dashboard</h5>
+  </div>
+  <a href="#" class="w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+  <a href="#" onclick="overview()" class="w3-padding "><i class="fa fa-bell fa-fw" ></i> Notification Feed</a>
+  <a href="#" onclick="repair()" class="w3-padding "><i class="fa fa-car fa-fw"></i>  Repair/Service</a>
+  <a href="#" class="w3-padding "><i class="fa fa-chain-broken fa-fw"></i>  Car BreakDown</a>
+  <a href="#" class="w3-padding"><i class="fa fa-history fa-fw"></i>  History</a>
+	
+</nav>
+
+
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" id="main" style="margin-left:300px;margin-top:43px;">
+</div>
+
+
+<script>
+// Get the Sidenav
+var mySidenav = document.getElementById("mySidenav");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidenav, and add overlay effect
+function w3_open() {
+    if (mySidenav.style.display === 'block') {
+        mySidenav.style.display = 'none';
+        overlayBg.style.display = "none";
+    } else {
+        mySidenav.style.display = 'block';
+        overlayBg.style.display = "block";
+    }
+}
+
+// Close the sidenav with the close button
+function w3_close() {
+    mySidenav.style.display = "none";
+    overlayBg.style.display = "none";
+}
+</script>
+
+</body>
+</html>
+

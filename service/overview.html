@@ -1,0 +1,107 @@
+<!-- Header -->
+  <header class="w3-container" style="padding-top:22px">
+    <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
+  </header>
+  
+ <script>
+ 
+ function opopupload(elem){
+ 	 var id = $(elem).attr("id");
+             $.ajax({
+            type: 'post',
+            url: '/cardoctor/service/dashboard/returnonregno.php',
+			data: { regno: id},
+			success: function (data) {
+			
+			document.getElementById("oname").innerHTML = data.posts[0].post.name;
+			document.getElementById("ocarname").innerHTML = data.posts[0].post.carname;
+			document.getElementById("obrand").innerHTML = data.posts[0].post.brand;
+			document.getElementById("omadeyear").innerHTML = data.posts[0].post.madeyear;
+			document.getElementById("oregno").innerHTML = data.posts[0].post.regno;
+			document.getElementById("oaddress").innerHTML = data.posts[0].post.address;
+					
+		   document.getElementById('id02').style.display='block';
+            }
+          });	
+ 
+ }
+ 
+ function divload(){
+document.getElementById("repair").innerHTML = "";
+         $.ajax({
+            type: 'post',
+            url: '/cardoctor/service/dashboard/repairref.php',
+            
+			success: function (data) {
+				
+				var length = Object.keys(data.posts).length
+				var htmlText = '';
+				
+				for(var i=0;i<length;i++){
+				
+				htmlText += '<div class=" w3-margin w3-panel w3-blue w3-card-8" style="text-align:left;">';
+                htmlText += '<b>Client Name:</b>&nbsp;<b>' + data.posts[i].post.name + 
+				'</b>&nbsp;&nbsp; <b>Car Name:</b>&nbsp; <b><span id="carname" style="margin-right:50px;">'+data.posts[i].post.carname +'</span></b>';
+                htmlText += '<button  id='+data.posts[i].post.regno+' onclick="opopupload(this)" class="b w3-btn w3-slim">Show more</button>';
+                htmlText += '</div>';
+				console.log(i);
+				
+				}
+				$('#repair').append(htmlText);
+			
+			  } 
+            
+          });
+		  }
+ </script>
+
+<style>
+.hline {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+</style>
+<div class="w3-row w3-margin">
+  <div class="w3-col w3-card s6 w3-border-black w3-border w3-hover-border-blue w3-center w3-white " style=" 
+  border-style: solid;border-style: inset;height:450px;overflow: auto;">
+  <h4 class="w3-teal">Car Repair/Service</h4>
+  <b>Current request are shown below..</b>
+  <hr class="hline">
+  <div id="repair" ></div>
+<!-- <div class=" w3-margin w3-panel w3-blue w3-card-24" style="text-align:left;">
+  <b>Client Name:</b>&nbsp;<b><span id="clientname"></span></b>&nbsp;&nbsp; <b>Car Name:</b>&nbsp;<b>
+  <span id="carname" style="margin-right:50px;"></span></b>
+  <button onclick="document.getElementById('id02').style.display='block'" class="w3-btn w3-slim">Show more</button>
+  </div> -->	
+
+
+  </div>
+  <div class="w3-col w3-card s6 w3-border-black w3-white w3-center w3-border w3-hover-border-blue" 
+  style="height:450px;overflow: auto;">
+   <h4 class="w3-red">Car BreakDown</h4>
+  <b>Current request are shown below..</b>
+  <hr class="hline">
+  
+  
+  </div>
+</div>
+
+
+<div id="id02" class="w3-modal"  >
+  <div class="w3-modal-content w3-border"  style="height:300px; width:500px;">
+  <span onclick="document.getElementById('id02').style.display='none'" class="w3-closebtn w3-xxlarge">&times;</span>
+    <div class="w3-container w3-margin w3-padding" >
+      <ul class="w3-ul  w3-hoverable w3-card-4">
+		  <li><b>Name:</b>&nbsp;&nbsp;<b><span id="oname"></span></b></li>
+		  <li><b>Car Name:</b>&nbsp;&nbsp;<b><span id="ocarname"></span></b></li>
+		  <li><b>Brand:</b>&nbsp;&nbsp;<b><span id="obrand"></span></b></li>
+		  <li><b>Made Year:</b>&nbsp;&nbsp;<b><span id="omadeyear"></span></b></li>
+		  <li><b>Reg No:</b>&nbsp;&nbsp;<b><span id="oregno"></span></b></li>
+		  <li><b>Address:</b>&nbsp;&nbsp;<b><span id="oaddress"></span></b></li>
+		</ul>
+	  <button onclick="" class="w3-btn w3-slim w3-margin">Accept</button>
+	  <button onclick="" class="w3-btn w3-red w3-slim ">Reject</button>
+    </div>
+  </div>
+</div>
