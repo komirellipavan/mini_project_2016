@@ -70,7 +70,14 @@
         <service
             android:name=".Notification"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".BookSucces" />
+        <activity android:name=".CarHistroyContinue" />
+        <activity android:name=".RepairHistory" />
+        <activity android:name=".BreakDownHistory" />
+        <activity android:name=".RepairHistroyView" />
+        <activity android:name=".AssistantHome"></activity>
     </application>
 
 </manifest>

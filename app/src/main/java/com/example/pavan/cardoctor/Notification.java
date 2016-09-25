@@ -3,9 +3,14 @@ package com.example.pavan.cardoctor;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -17,8 +22,11 @@ import io.socket.emitter.Emitter;
 
 public class Notification extends Service {
 
-    private Socket socket;
+    private  Socket socket;
     private  String data;
+    private  String email;
+    private  String serviceprovider;
+    SharedPreferences sharedpreferences;
     public Notification() {
     }
 
@@ -30,17 +38,30 @@ public class Notification extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        sharedpreferences = getSharedPreferences("log", Context.MODE_PRIVATE);
+        email =sharedpreferences.getString("email","no");
+
+        sharedpreferences = getSharedPreferences("book", Context.MODE_PRIVATE);
+        serviceprovider =sharedpreferences.getString("email","no");
+        // Register to receive messages.
+        // We are registering an observer (mMessageReceiver) to receive Intents
+        // with actions named "custom-event-name".
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+                mMessageReceive, new IntentFilter("book"));
+
         // Let it continue running until it is stopped.
         Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
 
         try {
             socket = IO.socket("http://192.168.10.107:3000");
-            socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
-
-                @Override
+        }
+        catch(Exception e){}
+        socket.connect();
+        socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
+            @Override
                 public void call(Object... args) {
                     Log.i("hhh","connected");
-                    socket.emit("adduser","pavan@gmail.com");
+                    socket.emit("adduser",email);
 
                 }
 
@@ -55,25 +76,59 @@ public class Notification extends Service {
 
                 }
 
+            }).on("req", new Emitter.Listener() {
+
+                @Override
+                public void call(Object... args) {
+
+                    Log.i("hhh","received");
+                    data = (String)args[0];
+                    sendMessag();
+
+                }
+
             }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
 
 
                 @Override
                 public void call(Object... args) {
-                    socket.disconnect();
+
                 }
 
+
             });
-            socket.connect();
+
+
+
+
+
+        return START_STICKY;
+    }
+    // Our handler for received Intents. This will be called whenever an Intent
+    // with an action named "custom-event-name" is broadcasted.
+    private BroadcastReceiver mMessageReceive = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // TODO Auto-generated method stub
+            // Get extra data included in the Intent
+            String message = intent.getStringExtra("message");
+            Log.d("book", "Got message: " + message);
+            if(socket.connected()) {
+                socket.emit("book", serviceprovider);
+            }
 
         }
-        catch(URISyntaxException e){
-            e.printStackTrace();
-        }
-        return START_STICKY;
+    };
+    private void sendMessag() {
+        Log.d("sender", "Broadcasting message");
+        Intent intent = new Intent("custom-event-name");
+        // You can also include some extra data.
+        intent.putExtra("message", "This is my message!");
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
     private void notification(){
+        sendMessag();
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.cast_ic_notification_small_icon)
@@ -107,6 +162,8 @@ public class Notification extends Service {
         super.onDestroy();
         Log.i("hhh","closing");
         socket.disconnect();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(
+                mMessageReceive);
         Toast.makeText(this, "Service Destroyed", Toast.LENGTH_LONG).show();
     }
 }

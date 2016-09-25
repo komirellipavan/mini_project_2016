@@ -7,33 +7,32 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.pavan.cardoctor.temp">
+    tools:context="com.example.pavan.cardoctor.CarHistroyContinue">
 
     <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start"
-        android:id="@+id/button20"
+        android:text="Repair/Serivce "
+        android:id="@+id/button24"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="151dp"
-        android:onClick="startService"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="126dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="repair"/>
 
     <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stop"
-        android:id="@+id/button21"
+        android:text="Car BeaKDown"
+        android:id="@+id/button25"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="stopService"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Send"
-        android:id="@+id/button23"
-        android:layout_below="@+id/button21"
-        android:layout_centerHorizontal="true"
-        android:onClick="sendMessage"/>
+        android:layout_alignRight="@+id/button24"
+        android:layout_alignEnd="@+id/button24"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
 </RelativeLayout>

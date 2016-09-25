@@ -43,5 +43,5 @@
         android:layout_alignEnd="@+id/button4"
         android:layout_alignLeft="@+id/button4"
         android:layout_alignStart="@+id/button4"
-        android:onClick="temp"/>
+        android:onClick="carHistory"/>
 </RelativeLayout>

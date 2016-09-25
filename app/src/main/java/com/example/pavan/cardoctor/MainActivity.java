@@ -28,11 +28,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public boolean fileExistance(String fname){
-        File file = getBaseContext().getFileStreamPath(fname);
-        return file.exists();
-    }
-
     public void temp(View view){
         Intent intent = new Intent(this,temp.class);
         startActivity(intent);
@@ -43,13 +38,30 @@ public class MainActivity extends AppCompatActivity {
     private void validateUser(){
 
         boolean valid;
+        boolean avalid;
 
         SharedPreferences sharedpreferences = getSharedPreferences("log", Context.MODE_PRIVATE);
         String email =sharedpreferences.getString("email","no");
 
 
-        if(email.equals("no"))
+        if(email.equals("no")) {
             valid = false;
+
+            sharedpreferences = getSharedPreferences("ass", Context.MODE_PRIVATE);
+            email =sharedpreferences.getString("email","no");
+            if(email.equals("no")){
+                avalid = false;
+            }
+            else
+               avalid  = true;
+            if(avalid) {
+                Intent home = new Intent(this, AssistantHome.class);
+                home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(home);
+                finish();
+            }
+        }
         else
             valid = true;
 

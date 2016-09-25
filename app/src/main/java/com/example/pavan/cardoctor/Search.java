@@ -81,8 +81,8 @@ public class Search extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                Object o = listview.getItemAtPosition(position);
-                ServiceProviderList newsData = (ServiceProviderList) o;
+                //Object o = listview.getItemAtPosition(position);
+                //ServiceProviderList newsData = (ServiceProviderList) o;
                 //Toast.makeText(Search.this, "Selected :" + " " + newsData, Toast.LENGTH_LONG).show();
                 ServiceProviderList item = (ServiceProviderList) (listview.getItemAtPosition(position));
                 SharedPreferences sharedpreferences = getSharedPreferences("book", Context.MODE_PRIVATE);
@@ -253,7 +253,7 @@ public class Search extends AppCompatActivity {
 
                     Log.i("hi", "onPostExecute: "+result.toString());
                     // Create JSONObject from result JSON string
-                    JSONArray arr = new JSONObject(result.toString()).getJSONArray("posts");
+                        JSONArray arr = new JSONObject(result.toString()).getJSONArray("posts");
                     // get the 'posts' section from the JSON string
                     for (int i = 0; i < arr.length(); i++) {
                         JSONObject post = arr.getJSONObject(i).getJSONObject("post");

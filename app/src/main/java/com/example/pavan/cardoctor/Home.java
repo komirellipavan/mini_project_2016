@@ -96,6 +96,11 @@ public class Home extends AppCompatActivity
        finish();
    }
 
+    public void carHistory(View view){
+        Intent i = new Intent(this,CarHistroyContinue.class);
+        startActivity(i);
+        finish();
+    }
 
 
 

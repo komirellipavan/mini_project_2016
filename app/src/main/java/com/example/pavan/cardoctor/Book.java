@@ -30,7 +30,13 @@ SharedPreferences sharedpreferences;
         shopNameBook.setText(shopname);
         addressBook.setText(address);
         ratingbar1=(RatingBar)findViewById(R.id.ratingBar);
-        ratingbar1.setRating(Float.parseFloat(rating));
+        if(rating.isEmpty()){
+            rating = "0.0";
+        }
+        else{
+            ratingbar1.setRating(Float.parseFloat(rating));
+        }
+
     }
 
     public void onBackPressed() {

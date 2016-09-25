@@ -7,33 +7,34 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.pavan.cardoctor.temp">
+    tools:context="com.example.pavan.cardoctor.BookSucces">
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start"
-        android:id="@+id/button20"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Successfully Booked"
+        android:id="@+id/textView17"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="151dp"
-        android:onClick="startService"/>
+        android:layout_marginTop="169dp" />
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stop"
-        android:id="@+id/button21"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Note: check in Car History for status and further information."
+        android:id="@+id/textView18"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="stopService"/>
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send"
-        android:id="@+id/button23"
-        android:layout_below="@+id/button21"
+        android:text="Ok"
+        android:id="@+id/button22"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/textView18"
         android:layout_centerHorizontal="true"
-        android:onClick="sendMessage"/>
+        android:onClick="ok"/>
 </RelativeLayout>
