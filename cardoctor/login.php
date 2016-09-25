@@ -15,7 +15,7 @@ if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
 
-         if($row["email"] == $email && $row["password"]){
+         if($row["email"] == $email && $row["password"] == $password){
 			 $check= "accept";
 			 break;
 		 }

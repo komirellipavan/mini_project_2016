@@ -43,7 +43,11 @@ else
 	$success1 = "null";
 }
 
-//create cars table
+
+
+//create address tables
+$sql = "CREATE TABLE $address(
+id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, //create cars table
 $sql = "CREATE TABLE $cars(
 id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
 name TEXT NOT NULL,
@@ -53,10 +57,6 @@ regno TEXT NOT NULL
 )";
 
 mysqli_query($con, $sql);
-
-//create address tables
-$sql = "CREATE TABLE $address(
-id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
 country VARCHAR(30) NOT NULL,
 state VARCHAR(30) NOT NULL,
 city VARCHAR(50) NOT NULL,
