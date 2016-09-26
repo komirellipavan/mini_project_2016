@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+    var add_button      = $(".add_field_button"); //Add button ID
+    
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div class="w3-padding"><input type="text" name="mytext[]"> <input style="margin-left:70px" type="text" name="mytext[]"><a href="#" class="remove_field">Remove</a></div>'); //add input box
+        }
+    });
+    
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+</script>
+<body>
+
+<div class="w3-container">
+  <h2>W3.CSS Login Modal</h2>
+
+  <button onclick="document.getElementById('id01').style.display='block'" class="w3-btn w3-green w3-large">Login</button>
+
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-8 w3-animate-zoom" style="max-width:650px">
+  
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-8 w3-display-topright" title="Close Modal">×</span>
+      </div>
+
+      <div class="input_fields_wrap w3-margin">
+	 
+    <button class="add_field_button w3-btn w3-margin">Add More Fields</button>
+	 <p><b  style="margin-left:20px;">Items</b>&nbsp;<b></b>&nbsp;&nbsp; <b  style="margin-left:210px;">Cost</b></p>
+    <div class="w3-padding"><input type="text" name="mytext[]"> <input style="margin-left:70px" type="text" name="mytext[]"></div>
+</div>
+
+    </div>
+  </div>
+</div>
+            
+</body>
+</html>
+
